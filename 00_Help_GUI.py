@@ -8,14 +8,14 @@ class Converter:
         print("hello world")
 
         # Formatting variables...
-        background_color = "red"
+        background_color = "purple"
 
         # Converter Main Screen GUI...
         self.converter_frame = Frame(width=600, height=600, bg=background_color,
                                      pady=10)
         self.converter_frame.grid()
 
-        # Temperature Conversion Heading (rov 0)
+        # Temperature Conversion Heading (row 0)
         self.temp_converter_label = Label(self.converter_frame, text="Temperature Converter",
                                           font=("Georgia", "18", "bold"),
                                           bg=background_color,
@@ -30,8 +30,46 @@ class Converter:
         
     def help(self):
         print("you asked for help")
-        get_help = Help(self)
-        get_help.help_text.configure(text="Help text goes here")
+        get_help = Help()
+        # get_help.help_text.configure(text="Help text goes here")
+
+
+class Help:
+    def _init_(self, partner):
+
+        background = "green"
+
+        # disable help button
+        partner.help_button.config(state=DISABLED)
+        
+        # Sets up child window (ie: help box)
+        self.help_box = Toplevel()
+
+        # Set up GUI Frame
+        self.help_frame = Frame(self.help_box, width=300, bg=background)
+        self.help_frame.grid()
+
+        # Set up Help heading (row 0)
+        self.how_heading = Label(self.help_frame, text="Help / Instructions",
+                                 font="arial 10 bold", bg=background)
+        self.how_heading.grid(row=0)
+
+        # Help text (label, row 1)
+        self.help_text = Label(self.help_frame, text="help text goes here",
+                               justify=LEFT, width=40, bg=background, wrap=250)
+        self.help_text(coloumn=0, row=1)
+
+        # Dismiss button (row 2)
+        self.dismiss_btn = Button(self.help_frame, text="Dismiss",
+                                  width=10, bg="green", font="arial 10 bold",
+                             command=partial(self.close_help, partner))
+        self.dismiss_btn.grid(row=2, pady=10)
+
+    def close_help(self,partner):
+        # Put help button back to normal...
+        partner.help_button.config(state=NORMAL)
+        self.help_box.destroy()
+
 
 # main routine
 if __name__ == "__main__":
