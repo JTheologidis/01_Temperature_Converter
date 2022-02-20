@@ -30,14 +30,14 @@ class Converter:
         
     def help(self):
         print("you asked for help")
-        get_help = Help()
-        # get_help.help_text.configure(text="Help text goes here")
+        get_help = Help(self)
+        get_help.help_text.configure(text="Help text goes here")
 
 
 class Help:
-    def _init_(self, partner):
+    def __init__(self, partner):
 
-        background = "green"
+        background = "cyan"
 
         # disable help button
         partner.help_button.config(state=DISABLED)
@@ -57,11 +57,11 @@ class Help:
         # Help text (label, row 1)
         self.help_text = Label(self.help_frame, text="help text goes here",
                                justify=LEFT, width=40, bg=background, wrap=250)
-        self.help_text(coloumn=0, row=1)
+        self.help_text.grid(row=1)
 
         # Dismiss button (row 2)
         self.dismiss_btn = Button(self.help_frame, text="Dismiss",
-                                  width=10, bg="green", font="arial 10 bold",
+                                  width=10, bg="light grey", font="arial 10 bold",
                              command=partial(self.close_help, partner))
         self.dismiss_btn.grid(row=2, pady=10)
 
