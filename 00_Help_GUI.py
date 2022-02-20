@@ -8,7 +8,7 @@ class Converter:
         print("hello world")
 
         # Formatting variables...
-        background_color = "purple"
+        background_color = "#d19fe8"    #light purple
 
         # Converter Main Screen GUI...
         self.converter_frame = Frame(width=600, height=600, bg=background_color,
@@ -44,6 +44,9 @@ class Help:
         
         # Sets up child window (ie: help box)
         self.help_box = Toplevel()
+
+        # If users press cross at the top, closes help and 'releases' help button
+        self.help_box.protocol('WM_DELETE_WINDOW', partial(self.close_help, partner))
 
         # Set up GUI Frame
         self.help_frame = Frame(self.help_box, width=300, bg=background)
